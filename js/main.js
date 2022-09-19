@@ -1,31 +1,10 @@
 class Game {
   constructor() {
     this.snake = new Snake();
-    
   }
 
-  start() {   
-    
-    this.snake.move();     
-    
-    this.gameOver();
-
-  
-    
-    
-    
-  }
-
-  gameOver() {
-
-    if(this.snake.positionX >= 50 || this.snake.positionX <= 0){
-        console.log("we are inside");
-        return location.href = "gameover.html"        
-    }else if(this.snake.positionY <= 0 || this.snake.positionY >= 50 ){
-        console.log("we are inside");
-        return location.href = "gameover.html"        
-    }
-
+  start() {
+    this.snake.move();
   }
 }
 
@@ -69,26 +48,96 @@ class Snake extends Characters {
   move() {
     const moveEvnt = document.addEventListener("keydown", (event) => {
       if (event.key === "ArrowLeft") {
+        //to check movement on Y axis
+        const initialY = this.positionY;
         this.positionX -= this.width;
         this.domElm.style.left = this.positionX + "vw";
-        console.log(this.positionX);
+
+        const myInterval = setInterval(() => {
+          if (initialY !== this.positionY) {
+            clearInterval(myInterval);
+          } else {
+            if (this.gameOver()) {
+              location.href = "gameover.html";
+            } else {
+              console.log(event.key);
+              this.positionX -= this.width;
+              this.domElm.style.left = this.positionX + "vw";
+            }
+          }
+        }, 200);
       }
+
       if (event.key === "ArrowRight") {
+        //to check movement on Y axis
+        const initialY = this.positionY;
         this.positionX += this.width;
         this.domElm.style.left = this.positionX + "vw";
-        console.log(this.positionX);
+
+        const myInterval = setInterval(() => {
+          if (initialY !== this.positionY) {
+            clearInterval(myInterval);
+          } else {
+            if (this.gameOver()) {
+              location.href = "gameover.html";
+            } else {
+              this.positionX += this.width;
+              this.domElm.style.left = this.positionX + "vw";
+            }
+          }
+        }, 200);
       }
+
       if (event.key === "ArrowUp") {
+        //to check movement on Y axis
+        const initialX = this.positionX;
         this.positionY += this.height;
         this.domElm.style.bottom = this.positionY + "vh";
-        console.log(this.positionY);
+
+        const myInterval = setInterval(() => {
+          if (initialX !== this.positionX) {
+            clearInterval(myInterval);
+          } else {
+            if (this.gameOver()) {
+              location.href = "gameover.html";
+            } else {
+              this.positionY += this.height;
+              this.domElm.style.bottom = this.positionY + "vh";
+            }
+          }
+        }, 200);
       }
+
       if (event.key === "ArrowDown") {
+        //to check movement on Y axis
+        const initialX = this.positionX;
         this.positionY -= this.height;
         this.domElm.style.bottom = this.positionY + "vh";
-        console.log(this.positionY);
+
+        const myInterval = setInterval(() => {
+          if (initialX !== this.positionX) {
+            clearInterval(myInterval);
+          } else {
+            if (this.gameOver()) {
+              location.href = "gameover.html";
+            } else {
+              this.positionY -= this.height;
+              this.domElm.style.bottom = this.positionY + "vh";
+            }
+          }
+        }, 200);
       }
     });
+  }
+
+  gameOver() {
+    if (this.positionX <= 0 || this.positionX >= 50) {
+      return true;
+    } else if (this.positionY <= 0 || this.positionY >= 49) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
 
