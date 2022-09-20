@@ -9,15 +9,12 @@ body {
   padding: 0;
 }
 
-#board {
+.board {
   position: absolute;    
-  background-color: skyblue;    
-  width: 40vw;
-  height: 40vw; 
-  left: 30vw;
-  bottom: 30vh;   
+  background-color: skyblue;        
   border: solid 10px slategrey;
   border-radius: 10px;
+  margin: 10vh 10vw;
   
 }
 
@@ -41,7 +38,7 @@ body {
   position: absolute;
 }
 
-.object {
+.obstacles {
   background-color: red;
   position: absolute;
 }

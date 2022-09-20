@@ -1,19 +1,53 @@
 class Game {
   constructor() {
+    this.board = this.createBoard();
     this.snake = new Snake();
     this.score = 0;
     this.lvl = 1;
+    this.obstacle = this.createObstacles();
+    this.food = this.createFood();
+    this.speed = 100 + this.lvl;
   }
 
   start() {
-    setInterval(() =>{
+    console.log(this.board.offsetWidth);
+    console.log(this.board.offsetHeight);
+    setInterval(() => {
+      
       this.snake.move();
       this.snake.directionsEventListnr();
-  }, 600);
+      let gameOver = this.gameOver();
+      const collisionObst = this.detectCollision(this.obstacle);
+      const collisionFood = this.detectCollision(this.food);
+      if (gameOver || collisionObst) {
+        location.href = "gameover.html";
+      } 
+      if(collisionFood){
+      this.removeElementofBoard(this.food);
+      }
+      
+      
+      
+    }, this.speed);
 
-/*   setInterval(() =>{
+   /*  setInterval(() => {
       this.createObstacles();
-  }, 3000); */
+    }, 3000); */
+  }
+
+  createBoard(){
+    const domElm = document.createElement("div");
+    domElm.className = "board";
+    domElm.id = "board";
+    domElm.style.width = "80vw";
+    domElm.style.height = "80vh";
+    domElm.style.bottom = "0vh";
+    domElm.style.left = "0vw";
+
+    const parentElm = document.querySelector("body");
+    parentElm.appendChild(domElm);
+    return domElm;
+
   }
 
   createFood() {
@@ -26,31 +60,30 @@ class Game {
     return obst;
   }
 
-  removeElement(objectInstance) {
-    if (this.isCollition(objectInstance)) {
-      this.objectInstance.domElm.remove();
-    }
+  removeElementofBoard(objectInstance) {
+    const elmentToRmv = objectInstance.domElmnt;
+    elmentToRmv.remove();
   }
 
-  isCollision(objectInstance) {
+  detectCollision(objectInstance) {
     if (
       this.snake.positionX < objectInstance.positionX + objectInstance.width &&
       this.snake.positionX + this.snake.width > objectInstance.positionX &&
-      this.snake.positionY < objectInstance.positionY + objectInstance.heigth &&
-      this.snake.heigth + this.snake.positionY > objectInstance.positionY
+      this.snake.positionY < objectInstance.positionY + objectInstance.height &&
+      this.snake.height + this.snake.positionY > objectInstance.positionY
     ) {
-      // Collision detected!
-      console.log("we have a collision");
+      // Collision detected!      
       return true;
     } else {
       return false;
     }
   }
 
-  gameOver() {
-    if (this.positionX <= 0 || this.positionX >= 50) {
+  gameOver() {    
+
+    if (this.snake.positionX <= 0 || this.snake.positionX >= 80) {
       return true;
-    } else if (this.positionY <= 0 || this.positionY >= 49) {
+    } else if (this.snake.positionY <= 0 || this.snake.positionY >= 80) {
       return true;
     } else {
       return false;
@@ -63,14 +96,14 @@ class Characters {
     this.positionX;
     this.positionY;
     this.width = 0;
-    this.heigth = 0;    
+    this.height = 0;    
   }
 
   addDomElement(className) {
     const domElm = document.createElement("div");
     domElm.className = className;
     domElm.style.width = this.width + "vw";
-    domElm.style.height = this.heigth + "vh";
+    domElm.style.height = this.height + "vh";
     domElm.style.bottom = this.positionY + "vh";
     domElm.style.left = this.positionX + "vw";
 
@@ -83,10 +116,10 @@ class Characters {
 class Snake extends Characters {
   constructor() {
     super();
-    this.positionX = 25;
-    this.positionY = 25;
-    this.width = 1;
-    this.heigth = 1;
+    this.positionX = 20;
+    this.positionY = 20;
+    this.width = 2;
+    this.height = 2;
     this.direction = "left";
     this.domElmnt = super.addDomElement("snake");
   }
@@ -133,8 +166,8 @@ class Food extends Characters {
     super();
     this.positionX = Math.floor(Math.random() * 49);
     this.positionY = Math.floor(Math.random() * 49);
-    this.width = 1;
-    this.height = 1;
+    this.width = 2;
+    this.height = 2;
     this.domElmnt = super.addDomElement("food");
   }
   
@@ -145,8 +178,8 @@ class Obstacles extends Characters {
     super();
     this.positionX = Math.floor(Math.random() * 39);
     this.positionY = Math.floor(Math.random() * 39);
-    this.width = 1;
-    this.height = 1;
+    this.width = 3;
+    this.height = 3;
     this.domElmnt = super.addDomElement("obstacles");
   }
  
