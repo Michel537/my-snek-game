@@ -9,11 +9,8 @@ class Game {
     this.speed = 100 + this.lvl;
   }
 
-  start() {
-    console.log(this.board.offsetWidth);
-    console.log(this.board.offsetHeight);
-    setInterval(() => {
-      
+  start() {    
+    setInterval(() => {     
       this.snake.move();
       this.snake.directionsEventListnr();
       let gameOver = this.gameOver();
@@ -21,21 +18,18 @@ class Game {
       const collisionFood = this.detectCollision(this.food);
       if (gameOver || collisionObst) {
         location.href = "gameover.html";
-      } 
-      if(collisionFood){
-      this.removeElementofBoard(this.food);
       }
-      
-      
-      
+      if (collisionFood) {
+        this.removeElementofBoard(this.food);
+      }
     }, this.speed);
 
-   /*  setInterval(() => {
+    /*  setInterval(() => {
       this.createObstacles();
     }, 3000); */
   }
 
-  createBoard(){
+  createBoard() {
     const domElm = document.createElement("div");
     domElm.className = "board";
     domElm.id = "board";
@@ -47,7 +41,6 @@ class Game {
     const parentElm = document.querySelector("body");
     parentElm.appendChild(domElm);
     return domElm;
-
   }
 
   createFood() {
@@ -72,18 +65,23 @@ class Game {
       this.snake.positionY < objectInstance.positionY + objectInstance.height &&
       this.snake.height + this.snake.positionY > objectInstance.positionY
     ) {
-      // Collision detected!      
+      // Collision detected!
       return true;
     } else {
       return false;
     }
   }
 
-  gameOver() {    
-
-    if (this.snake.positionX <= 0 || this.snake.positionX >= 80) {
+  gameOver() {
+    if (
+      this.snake.positionX <= 0 ||
+      this.snake.positionX + this.snake.width >= 80
+    ) {
       return true;
-    } else if (this.snake.positionY <= 0 || this.snake.positionY >= 80) {
+    } else if (
+      this.snake.positionY <= 0 ||
+      this.snake.positionY + this.snake.height >= 80
+    ) {
       return true;
     } else {
       return false;
