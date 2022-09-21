@@ -3,7 +3,9 @@ html {
 }
 
 body {  
-  position: relative;
+  display: flex;      
+  flex-direction: column;
+  justify-content: center;
   background-image: url("../images/space");
   height: 100%;  
   margin: 0;
@@ -12,7 +14,7 @@ body {
 
 .board {
   position: absolute;    
-  background-color: grey;      
+  background-color: whitesmoke;      
   border: solid 10px slategrey;
   border-radius: 10px;
   margin: 100px 100px;
@@ -29,7 +31,7 @@ body {
 }
 
 .ufo {
-  background-color: rgb(34, 168, 217);
+  background-image: url("../images/skeleton-animation_00.png");  
   box-shadow: 0 0 5px rgb(34, 168, 217);
   position: absolute;
 }
@@ -45,16 +47,33 @@ body {
 }
 
 #game-over {
-  width: 300px;
-  height: 300px;
-  background-color: aquamarine;
+  display: flex;    
+  flex-direction: column;
+  justify-content: end;
+  width: 25vw;
+  height: 50vh;
+  background-image: url("../images/game-over.jpg");
   text-align: center;
   margin: 0 auto;  
   border-radius: 10px;
-  border: solid 10px skyblue;
-  
+  border: solid 10px black;  
   
 }
+
+#link {
+  background-color: grey;
+  size: 60px;
+  color: white;
+  border: solid 5px black;
+  border-radius: 10px;
+  box-shadow: 3px;
+  width: 100px;
+  align-self: center;
+  margin-bottom: 40px;
+}
+
+
+
 
 #game-start {
   position: absolute;
