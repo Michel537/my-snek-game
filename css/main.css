@@ -12,7 +12,7 @@ body {
 .board {
   position: absolute;    
   background-image: url("../images/space");       
-  border: solid 20px slategrey;
+  border: solid 10px slategrey;
   border-radius: 10px;
   margin: 10vh 10vw;
   
@@ -36,6 +36,7 @@ body {
 .food {
   background-color: yellow;
   position: absolute;
+  border-radius: 50%;
 }
 
 .obstacles {
@@ -49,9 +50,21 @@ body {
   background-color: aquamarine;
   text-align: center;
   margin: 0 auto;  
-  border-radius: 20px;
+  border-radius: 10px;
   border: solid 10px skyblue;
+  
   
 }
 
+#game-over {
+  width: 300px;
+  height: 300px;
+  background-color: aquamarine;
+  text-align: center;
+  margin: 0 auto;  
+  border-radius: 10px;
+  border: solid 10px skyblue;
+  
+  
+}
 

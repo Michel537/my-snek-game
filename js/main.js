@@ -6,11 +6,13 @@ class Game {
     this.lvl = 1;
     this.obstacle = this.createObstacles();
     this.food = this.createFood();
-    this.speed = 100 + this.lvl;
+    this.speed = 100 * this.lvl;
   }
 
-  start() {    
-    setInterval(() => {     
+  start() {
+    setInterval(() => {
+      console.log(this.snake.positionX);
+      console.log(this.snake.positionY);
       this.snake.move();
       this.snake.directionsEventListnr();
       let gameOver = this.gameOver();
@@ -23,10 +25,6 @@ class Game {
         this.removeElementofBoard(this.food);
       }
     }, this.speed);
-
-    /*  setInterval(() => {
-      this.createObstacles();
-    }, 3000); */
   }
 
   createBoard() {
@@ -94,7 +92,7 @@ class Characters {
     this.positionX;
     this.positionY;
     this.width = 0;
-    this.height = 0;    
+    this.height = 0;
   }
 
   addDomElement(className) {
@@ -114,15 +112,13 @@ class Characters {
 class Snake extends Characters {
   constructor() {
     super();
-    this.positionX = 20;
-    this.positionY = 20;
+    this.positionX = 40;
+    this.positionY = 40;
     this.width = 2;
     this.height = 2;
     this.direction = "left";
     this.domElmnt = super.addDomElement("snake");
   }
-
-  
 
   directionsEventListnr() {
     const movementEvnt = document.addEventListener("keydown", (event) => {
@@ -141,7 +137,7 @@ class Snake extends Characters {
     return movementEvnt;
   }
 
-  move() {    
+  move() {
     if (this.direction === "left") {
       this.positionX -= this.width;
     } else if (this.direction === "right") {
@@ -150,37 +146,32 @@ class Snake extends Characters {
       this.positionY += this.width;
     } else if (this.direction === "down") {
       this.positionY -= this.width;
-    }    
+    }
     this.domElmnt.style.left = this.positionX + "vw";
     this.domElmnt.style.bottom = this.positionY + "vh";
   }
 }
 
-
-
-
 class Food extends Characters {
   constructor() {
     super();
-    this.positionX = Math.floor(Math.random() * 49);
-    this.positionY = Math.floor(Math.random() * 49);
+    this.positionX = Math.floor(Math.random() * 77);
+    this.positionY = Math.floor(Math.random() * 77);
     this.width = 2;
     this.height = 2;
     this.domElmnt = super.addDomElement("food");
   }
-  
 }
 
 class Obstacles extends Characters {
   constructor() {
     super();
-    this.positionX = Math.floor(Math.random() * 39);
-    this.positionY = Math.floor(Math.random() * 39);
+    this.positionX = Math.floor(Math.random() * 77);
+    this.positionY = Math.floor(Math.random() * 77);
     this.width = 3;
     this.height = 3;
     this.domElmnt = super.addDomElement("obstacles");
   }
- 
 }
 
 const game = new Game();
