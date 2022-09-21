@@ -1,30 +1,73 @@
 class Game {
   constructor() {
     this.board = this.createBoard();
-    this.snake = new Snake();
+    this.ufo = new Ufo();
     this.score = 0;
     this.lvl = 1;
-    this.obstacle = this.createObstacles();
-    this.food = this.createFood();
-    this.speed = 100 * this.lvl;
+    this.multiplayer = 1;    
+    this.asteroids = [];    
+    this.fuel = null;
+    this.speed = 100 / this.lvl;
+    this.dificulty = 5000 / this.lvl;
   }
 
   start() {
-    setInterval(() => {
-      console.log(this.snake.positionX);
-      console.log(this.snake.positionY);
-      this.snake.move();
-      this.snake.directionsEventListnr();
+    console.log(this.score);
+    this.fuel = this.createfuel();
+    const obstacle = this.createasteroids();
+    this.asteroids.push(obstacle);
+
+   const movementInt =  setInterval(() => { 
+
+      //Ufo movements      
+      this.ufo.move();
+      this.ufo.directionsEventListnr();
+
+      //Collision
       let gameOver = this.gameOver();
-      const collisionObst = this.detectCollision(this.obstacle);
-      const collisionFood = this.detectCollision(this.food);
-      if (gameOver || collisionObst) {
+      this.asteroids.forEach( element => {
+        const collisionObst = this.detectCollision(element);  
+        if(collisionObst){          
+        location.href = "gameover.html";
+        }      
+
+      })
+
+      //Game over
+      if (gameOver) {
         location.href = "gameover.html";
       }
-      if (collisionFood) {
-        this.removeElementofBoard(this.food);
+      
+
+      //fuel and score
+      const collisonfuel = this.detectCollision(this.fuel);
+      if(collisonfuel){
+        this.score = this.score + (30 * this.multiplayer);
+        console.log(this.score);
+        this.removeElementofBoard(this.fuel);
+        this.fuel = this.createfuel();
       }
+
+     
+     
     }, this.speed);
+
+
+       //Creating objects
+
+       const obstInterval = setInterval(() => {
+          const obst = this.createasteroids();
+          this.asteroids.push(obst);                
+          
+        }, 3000);
+
+    
+
+    
+    
+   
+
+
   }
 
   createBoard() {
@@ -41,27 +84,28 @@ class Game {
     return domElm;
   }
 
-  createFood() {
-    const food = new Food();
-    return food;
+  createfuel() {
+    const fuel = new Fuel();
+    return fuel;
   }
 
-  createObstacles() {
-    const obst = new Obstacles();
+  createasteroids() {
+    const obst = new Asteroid();
     return obst;
   }
 
-  removeElementofBoard(objectInstance) {
-    const elmentToRmv = objectInstance.domElmnt;
+  removeElementofBoard(fuel) {
+    const elmentToRmv = fuel.domElmnt;    
+    fuel = null;
     elmentToRmv.remove();
   }
 
   detectCollision(objectInstance) {
     if (
-      this.snake.positionX < objectInstance.positionX + objectInstance.width &&
-      this.snake.positionX + this.snake.width > objectInstance.positionX &&
-      this.snake.positionY < objectInstance.positionY + objectInstance.height &&
-      this.snake.height + this.snake.positionY > objectInstance.positionY
+      this.ufo.positionX < objectInstance.positionX + objectInstance.width &&
+      this.ufo.positionX + this.ufo.width > objectInstance.positionX &&
+      this.ufo.positionY < objectInstance.positionY + objectInstance.height &&
+      this.ufo.height + this.ufo.positionY > objectInstance.positionY
     ) {
       // Collision detected!
       return true;
@@ -72,13 +116,13 @@ class Game {
 
   gameOver() {
     if (
-      this.snake.positionX <= 0 ||
-      this.snake.positionX + this.snake.width >= 80
+      this.ufo.positionX < 0 ||
+      this.ufo.positionX + this.ufo.width > 80
     ) {
       return true;
     } else if (
-      this.snake.positionY <= 0 ||
-      this.snake.positionY + this.snake.height >= 80
+      this.ufo.positionY < 0 ||
+      this.ufo.positionY + this.ufo.height > 80
     ) {
       return true;
     } else {
@@ -98,7 +142,7 @@ class Characters {
   addDomElement(className) {
     const domElm = document.createElement("div");
     domElm.className = className;
-    domElm.style.width = this.width + "vw";
+    domElm.style.width = this.width + "vh";
     domElm.style.height = this.height + "vh";
     domElm.style.bottom = this.positionY + "vh";
     domElm.style.left = this.positionX + "vw";
@@ -109,7 +153,7 @@ class Characters {
   }
 }
 
-class Snake extends Characters {
+class Ufo extends Characters {
   constructor() {
     super();
     this.positionX = 40;
@@ -117,7 +161,7 @@ class Snake extends Characters {
     this.width = 2;
     this.height = 2;
     this.direction = "left";
-    this.domElmnt = super.addDomElement("snake");
+    this.domElmnt = super.addDomElement("ufo");
   }
 
   directionsEventListnr() {
@@ -152,25 +196,25 @@ class Snake extends Characters {
   }
 }
 
-class Food extends Characters {
+class Fuel extends Characters {
   constructor() {
     super();
-    this.positionX = Math.floor(Math.random() * 77);
-    this.positionY = Math.floor(Math.random() * 77);
+    this.positionX = Math.floor(Math.random() * 70) + 1;
+    this.positionY = Math.floor(Math.random() * 70) + 1;
     this.width = 2;
     this.height = 2;
-    this.domElmnt = super.addDomElement("food");
+    this.domElmnt = super.addDomElement("fuel");
   }
 }
 
-class Obstacles extends Characters {
+class Asteroid extends Characters {
   constructor() {
     super();
-    this.positionX = Math.floor(Math.random() * 77);
-    this.positionY = Math.floor(Math.random() * 77);
+    this.positionX = Math.floor(Math.random() * 70) + 5;
+    this.positionY = Math.floor(Math.random() * 70) + 5;
     this.width = 3;
     this.height = 3;
-    this.domElmnt = super.addDomElement("obstacles");
+    this.domElmnt = super.addDomElement("asteroids");
   }
 }
 
