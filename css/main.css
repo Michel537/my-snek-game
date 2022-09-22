@@ -6,16 +6,17 @@ body {
   display: flex;      
   flex-direction: column;
   justify-content: center;
-  background-image: url("../images/space");
+  background-image: url("../images/space");    
   height: 100%;  
   margin: 0;
   padding: 0;
 }
 
 .board {
-  position: absolute;    
-  background-color: whitesmoke;      
-  border: solid 10px slategrey;
+  position: absolute;      
+  background: rgba(0,0,0,0.6);
+  opacity: 0,2;      
+  border: solid 15px slategrey;
   border-radius: 10px;
   margin: 100px 100px;
   
@@ -23,12 +24,12 @@ body {
 }
 
 #score {
-  background-color: wheat;
-  width: 5vw;
-  height: 5vh;
-  position: absolute;  
-  bottom: 0vh;
-  left: 0vw;
+  position: absolute;
+  color: white;
+  top: 0vh;
+  left: 700px;
+  margin-top: 5vh;  
+
 }
 
 .ufo {
@@ -37,6 +38,8 @@ body {
   background-position: center; 
   background-size: cover; 
   position: absolute;  
+  box-shadow: 3px solid;
+  
 }
 
 
@@ -46,6 +49,7 @@ body {
   background-position: center; 
   background-size: cover; 
   position: absolute;    
+  
 }
 
 .asteroids {
@@ -54,6 +58,8 @@ body {
   background-position: center; 
   background-size: cover; 
   position: absolute;  
+  
+  
 }
 
 #game-over {
@@ -78,7 +84,7 @@ body {
   box-shadow: 3px;
   width: 100px;
   align-self: center;
-  margin-bottom: 40px;
+  margin-top: 40px;
   text-decoration: none;
 }
 
@@ -113,5 +119,29 @@ body {
   margin: 0;
   padding: 0;
 
+}
+
+#score-board {
+  position: absolute;
+  color: white;
+  top: 0vh;
+  left: 600px;
+  margin-top: 5vh;  
+
+}
+
+#gameover-body {  
+  display: flex;      
+  flex-direction: column;
+  justify-content: center;
+  background-image: url("../images/space");    
+  height: 100%;  
+  margin: 0;
+  padding: 0;
+}
+
+#text {
+  font-size: 24px;
+  color: white;
 }
 
