@@ -1,6 +1,6 @@
 class Game {
   constructor() {
-    this.board = this.createBoard();
+    this.board = this.createBoard();    
     this.ufo = new Ufo();
     this.score = 0;
     this.lvl = 1;
@@ -34,7 +34,7 @@ class Game {
       })
 
       //Game over
-      if (gameOver) {
+      if (gameOver) {        
         location.href = "gameover.html";
       }
       
@@ -69,6 +69,7 @@ class Game {
 
 
   }
+ 
 
   createBoard() {
     const domElm = document.createElement("div");
@@ -201,8 +202,8 @@ class Fuel extends Characters {
     super();
     this.positionX = Math.floor(Math.random() * 70) + 1;
     this.positionY = Math.floor(Math.random() * 70) + 1;
-    this.width = 2;
-    this.height = 2;
+    this.width = 3;
+    this.height = 3;
     this.domElmnt = super.addDomElement("fuel");
   }
 }

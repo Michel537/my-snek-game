@@ -19,6 +19,7 @@ body {
   border-radius: 10px;
   margin: 100px 100px;
   
+  
 }
 
 #score {
@@ -69,7 +70,7 @@ body {
   
 }
 
-#link {
+.link {
   background-color: grey;  
   color: white;
   border: solid 5px grey;
@@ -85,17 +86,32 @@ body {
 
 
 #game-start {
-  position: absolute;
-  width: 300px;
-  height: 300px;
-  background-color: aquamarine;
+  display: flex;    
+  flex-direction: column;
+  justify-content: end;
+  align-self: flex-end;
+  width: 600px;
+  height: 600px;
+  background-image: url("../images/vector-aliens-in-ufo-in-outer-space.jpg");
+  background-position: center; 
+  background-size: cover;  
   text-align: center;
   margin: 0 auto;  
   border-radius: 10px;
-  border: solid 10px skyblue;
-  bottom: 50vh;
-  left: 50vw;
+  border: solid 10px black;  
   
-  
+}
+
+#start-body {
+  display: flex;      
+  flex-direction: column;
+  justify-content: center;
+  background-image: url("../images/start-image");
+  background-position: center; 
+  background-size: cover;  
+  height: 100%;  
+  margin: 0;
+  padding: 0;
+
 }
 
