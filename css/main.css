@@ -32,17 +32,26 @@ body {
 
 .ufo {
   background-image: url("../images/skeleton-animation_00.png");  
-  box-shadow: 0 0 5px rgb(34, 168, 217);
-  position: absolute;
-}
-
-.fuel {
-  background-color: yellow;
+  background-repeat: no-repeat;  
+  background-position: center; 
+  background-size: cover; 
   position: absolute;  
 }
 
+
+.fuel {
+  background-image: url("../images/fuel");  
+  background-repeat: no-repeat;  
+  background-position: center; 
+  background-size: cover; 
+  position: absolute;    
+}
+
 .asteroids {
-  background-color: red;
+  background-image: url("../images/Asteroid-Transparent-PNG.png");  
+  background-repeat: no-repeat;  
+  background-position: center; 
+  background-size: cover; 
   position: absolute;  
 }
 
@@ -50,8 +59,8 @@ body {
   display: flex;    
   flex-direction: column;
   justify-content: end;
-  width: 25vw;
-  height: 50vh;
+  width: 600px;
+  height: 600px;
   background-image: url("../images/game-over.jpg");
   text-align: center;
   margin: 0 auto;  
@@ -61,15 +70,15 @@ body {
 }
 
 #link {
-  background-color: grey;
-  size: 60px;
+  background-color: grey;  
   color: white;
-  border: solid 5px black;
+  border: solid 5px grey;
   border-radius: 10px;
   box-shadow: 3px;
   width: 100px;
   align-self: center;
   margin-bottom: 40px;
+  text-decoration: none;
 }
 
 

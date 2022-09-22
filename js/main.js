@@ -116,13 +116,13 @@ class Game {
 
   gameOver() {
     if (
-      this.ufo.positionX < 0 ||
-      this.ufo.positionX + this.ufo.width > 80
+      this.ufo.positionX <= 0 ||
+      this.ufo.positionX + this.ufo.width >= 80
     ) {
       return true;
     } else if (
-      this.ufo.positionY < 0 ||
-      this.ufo.positionY + this.ufo.height > 80
+      this.ufo.positionY <= 0 ||
+      this.ufo.positionY + this.ufo.height >= 80
     ) {
       return true;
     } else {
@@ -158,8 +158,8 @@ class Ufo extends Characters {
     super();
     this.positionX = 40;
     this.positionY = 40;
-    this.width = 2;
-    this.height = 2;
+    this.width = 3;
+    this.height = 3;
     this.direction = "left";
     this.domElmnt = super.addDomElement("ufo");
   }
