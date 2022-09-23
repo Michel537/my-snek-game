@@ -102,7 +102,7 @@ class Game {
     }
   }
 
-  gameOver() {
+ /*  gameOver() {
     if (
       this.ufo.positionX  <= 0  ||
       this.ufo.positionX >= 80 ||
@@ -113,7 +113,7 @@ class Game {
     } else {
       return false;
     }
-  }
+  } */
 }
 
 class Characters {
