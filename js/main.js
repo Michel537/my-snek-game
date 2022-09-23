@@ -11,35 +11,33 @@ class Game {
     this.dificulty = 5000 / this.lvl;
   }
 
-  start() {    
+  start() {
     this.fuel = this.createfuel();
     const obstacle = this.createasteroids();
     this.asteroids.push(obstacle);
 
     const movementInt = setInterval(() => {
-      console.log("X"+this.ufo.positionX);
-      console.log("Y"+this.ufo.positionY);
-     
-    
+      console.log("X" + this.ufo.positionX);
+      console.log("Y" + this.ufo.positionY);
+
+      //Game over
+    /*   let gameOver = this.gameOver();
+      if (gameOver) {
+        location.href = "gameover.html";
+      }
+ */
       //Ufo movements
       this.ufo.move();
       this.ufo.directionsEventListnr();
 
       //Collision
-      let gameOver = this.gameOver();
+
       this.asteroids.forEach((element) => {
         const collisionObst = this.detectCollision(element);
         if (collisionObst) {
-          
           location.href = "gameover.html";
         }
       });
-
-      //Game over
-      if (gameOver) { 
-        /* alert("stop");  */      
-        location.href = "gameover.html";
-      } 
 
       //fuel and score
       const scoreElmnt = document.getElementById("score");
@@ -104,24 +102,18 @@ class Game {
     }
   }
 
-   gameOver() {
+  gameOver() {
     if (
-      this.ufo.positionX   <= 0  ||
-      this.ufo.positionX + this.ufo.width/2 >= 80 
-    ) {
-      return true;
-    } else if (
-      this.ufo.positionY <= 0  ||
-      this.ufo.positionY + this.ufo.height/2 >= 80 
+      this.ufo.positionX  <= 0  ||
+      this.ufo.positionX >= 80 ||
+      this.ufo.positionY <= 0 ||
+      this.ufo.positionY >= 80
     ) {
       return true;
     } else {
       return false;
     }
   }
-
-  
-   
 }
 
 class Characters {
@@ -175,16 +167,18 @@ class Ufo extends Characters {
   }
 
   move() {
-   /*  if (this.positionX  <= 0) {
-      this.positionX = 80;
-    } else if (this.positionX + 4 >= 80) {
-      this.positionX = 0;
-    } else if (this.positionY + 2 <= 0) {
-      this.positionY = 80;
-    } else if (this.positionY + 2 >= 80) {
-      this.positionY = 0;
+    if (this.positionX  < 2) {
+      this.positionX = 76;
+    } else if (this.positionX > 76) {
+      this.positionX = 2;
+    } else if (this.positionY < 2) {
+      this.positionY = 76;
+    } else if (this.positionY > 76) {
+      this.positionY = 2;
     }
- */
+
+    
+
     if (this.direction === "left") {
       this.positionX -= 3;
     } else if (this.direction === "right") {
