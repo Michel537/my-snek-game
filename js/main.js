@@ -17,15 +17,8 @@ class Game {
     this.asteroids.push(obstacle);
 
     const movementInt = setInterval(() => {
-      console.log("X" + this.ufo.positionX);
-      console.log("Y" + this.ufo.positionY);
+      
 
-      //Game over
-    /*   let gameOver = this.gameOver();
-      if (gameOver) {
-        location.href = "gameover.html";
-      }
- */
       //Ufo movements
       this.ufo.move();
       this.ufo.directionsEventListnr();
@@ -102,18 +95,7 @@ class Game {
     }
   }
 
- /*  gameOver() {
-    if (
-      this.ufo.positionX  <= 0  ||
-      this.ufo.positionX >= 80 ||
-      this.ufo.positionY <= 0 ||
-      this.ufo.positionY >= 80
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  } */
+ 
 }
 
 class Characters {
